@@ -1,5 +1,7 @@
 "use client";
 import { Button } from "./ui/button";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 
 function Social() {
   return (
@@ -7,11 +9,21 @@ function Social() {
       {/* 
     // TODO: install react-icons add google and facebook
     */}
-      <Button className="w-full" variant="outline" onClick={() => {}}>
-        Google
+      <Button
+        size="icon"
+        className="w-full text-xl"
+        variant="outline"
+        onClick={() => {}}
+      >
+        <FcGoogle className="h-8 w-8" />
       </Button>
-      <Button className="w-full" variant="outline" onClick={() => {}}>
-        GitHub
+      <Button
+        size="icon"
+        className="w-full text-xl"
+        variant="outline"
+        onClick={() => {}}
+      >
+        <FaGithub className="h-8 w-8" />
       </Button>
     </div>
   );

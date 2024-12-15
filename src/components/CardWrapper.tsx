@@ -4,6 +4,7 @@ import Header from "./Header";
 import Social from "./Social";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 
 function CardWrapper({
   backButtonHref,
@@ -14,27 +15,22 @@ function CardWrapper({
 }: CardWrapperProps) {
   return (
     <>
-      {/* Card */}
-      <div className="w-[400px] shadow-md">
-        {/* CardHeader */}
-        <div>
+      <Card className="w-[400px] shadow-md">
+        <CardHeader>
           <Header label={`${headerLabel}`} />
-        </div>
-        {/* CardContent */}
-        <div>{children}</div>
-        {/* CardFooter */}
+        </CardHeader>
+        <CardContent>{children}</CardContent>
         {showSocial && (
-          <div>
+          <CardFooter>
             <Social />
-          </div>
+          </CardFooter>
         )}
-        {/* CardFooter */}
-        <div>
+        <CardFooter>
           <Button variant="link" asChild className="w-full">
             <Link href={`${backButtonHref}`}>{backButtonLabel}</Link>
           </Button>
-        </div>
-      </div>
+        </CardFooter>
+      </Card>
     </>
   );
 }
