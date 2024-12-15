@@ -12,3 +12,10 @@ export interface CardWrapperProps {
   backButtonHref: string;
   showSocial: boolean;
 }
+export interface logInInputInterface {
+  id: string;
+  placeholder: string;
+  name: "identifier" | "password";
+  type: "text" | "password";
+  label: string;
+}

@@ -1,4 +1,5 @@
 import CardWrapper from "@/components/CardWrapper";
+import LoginFunctionality from "@/components/LoginFunctionality";
 
 function page() {
   return (
@@ -8,7 +9,7 @@ function page() {
       backButtonHref="/auth/register"
       showSocial
     >
-      Log in
+     <LoginFunctionality/>
     </CardWrapper>
   );
 }
