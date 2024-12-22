@@ -19,3 +19,10 @@ export interface logInInputInterface {
   type: "text" | "password";
   label: string;
 }
+export interface RegisterInputsInterface {
+  id: string;
+  placeholder: string;
+  name: "username" | "email" | "password";
+  type: "text" | "email" | "password";
+  label: string;
+}

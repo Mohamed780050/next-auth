@@ -4,8 +4,11 @@ export const loginSchema = z.object({
     .string()
     .min(1, "don't leave that field empty")
     .or(z.string().email()),
-  password: z
-    .string()
-    .min(1, "don't leave that field empty")
-    // .min(8, "password is less than 8 chars"),
+  password: z.string().min(1, "don't leave that field empty"),
+  // .min(8, "password is less than 8 chars"),
+});
+export const registerSchema = z.object({
+  username: z.string().min(1, "don't leave that field empty"),
+  email: z.string().email().min(1, "don't leave that field empty"),
+  password: z.string().min(1, "don't leave that field empty"),
 });

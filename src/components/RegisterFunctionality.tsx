@@ -1,6 +1,6 @@
 "use client";
 import * as z from "zod";
-import { loginSchema } from "@/Schema/validation";
+import { registerSchema } from "@/Schema/validation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -10,26 +10,27 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { logInInputs } from "@/data/data";
+import { registerInputs } from "@/data/data";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import FormError from "./FormError";
 import { useState } from "react";
 import FormSuccess from "./FormSuccess";
-import { login } from "../../Action/login";
-function LoginFunctionality() {
+import { signup } from "../../Action/signup";
+function RegisterFunctionality() {
   const [TIAE, setTIAE] = useState(false);
   const [success, setSuccess] = useState(false);
-  const form = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<z.infer<typeof registerSchema>>({
+    resolver: zodResolver(registerSchema),
     defaultValues: {
-      identifier: "",
+      email: "",
+      username: "",
       password: "",
     },
   });
-  async function onSubmit(values: z.infer<typeof loginSchema>) {
+  async function onSubmit(values: z.infer<typeof registerSchema>) {
     try {
-      const response = await login(values);
+      const response = await signup(values);
       console.log(response);
       if (response?.err) {
         setTIAE(true);
@@ -47,7 +48,7 @@ function LoginFunctionality() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <div className="space-y-4">
-          {logInInputs.map((input, index) => (
+          {registerInputs.map((input, index) => (
             <FormField
               key={index}
               control={form.control}
@@ -74,10 +75,10 @@ function LoginFunctionality() {
           className="w-full"
           disabled={form.formState.isSubmitting}
         >
-          Login
+          Sign up
         </Button>
       </form>
     </Form>
   );
 }
-export default LoginFunctionality;
+export default RegisterFunctionality;
