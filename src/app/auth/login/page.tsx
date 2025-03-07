@@ -9,7 +9,7 @@ function page() {
       backButtonHref="/auth/register"
       showSocial
     >
-     <LoginFunctionality/>
+      <LoginFunctionality />
     </CardWrapper>
   );
 }

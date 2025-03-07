@@ -34,8 +34,7 @@ function LoginFunctionality() {
       if (response?.err) {
         setTIAE(true);
         setSuccess(false);
-      }
-      if (response?.success) {
+      } else {
         setTIAE(false);
         setSuccess(true);
       }

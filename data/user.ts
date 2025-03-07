@@ -7,8 +7,7 @@ async function getUserByEmail(identifier: string) {
       },
     });
     return user;
-  } catch (err) {
-    console.log(err);
+  } catch {
     return null;
   }
 }
@@ -20,8 +19,7 @@ async function getUserById(id: string) {
       },
     });
     return user;
-  } catch (err) {
-    console.log(err);
+  } catch {
     return null;
   }
 }
