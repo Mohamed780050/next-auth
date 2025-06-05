@@ -15,6 +15,7 @@ export default {
           const { identifier, password } = validation.data;
 
           const checkUser = await user.getUserByEmail(identifier);
+          console.log(checkUser);
           if (!checkUser || !checkUser.password) return null;
 
           const checkPassword = await bcrypt.compare(
@@ -25,11 +26,10 @@ export default {
 
           // Ensure the object matches the `User` type expected by NextAuth
           return {
-            id: checkUser.id,       // Required
-            username: checkUser.username,   // Optional
+            id: checkUser.id, // Required
+            name: checkUser.username, // Optional
             email: checkUser.email, // Optional
           } satisfies User;
-
         } catch (err) {
           console.error("Authorize error:", err);
           return null; // Always return null on error
