@@ -12,7 +12,7 @@ export async function login(values: z.infer<typeof loginSchema>) {
     if (!reValidation.success) return { status: 400, err: "Invalid data" };
     const { identifier, password } = reValidation.data;
     await signIn("credentials", {
-      emial:identifier,
+      identifier,
       password,
       redirectTo: DEFAULT_LOGIN_REDIRECT,
     });
