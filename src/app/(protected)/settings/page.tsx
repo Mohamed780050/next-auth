@@ -2,6 +2,7 @@ import { auth, signOut } from "@/auth";
 import { Button } from "@/components/ui/button";
 async function page() {
   const session = await auth();
+  console.log(session?.user);
   return (
     <div>
       Setting: {JSON.stringify(session)}
