@@ -5,6 +5,19 @@ import { db } from "./lib/db";
 import UserInfo from "@/../data/user";
 type newSession = DefaultSession["user"] & { role: "ADMIN" | "USER" };
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  events: {
+    async linkAccount({ user }) {
+      await db.user.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          emailVerified: new Date(),
+          
+        },
+      });
+    },
+  },
   callbacks: {
     // async signIn({ user }) {
     //   const existingUser = await UserInfo.getUserById(`${user.id}`);

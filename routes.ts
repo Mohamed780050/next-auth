@@ -1,7 +1,7 @@
 /**
  * this is for users that are not signed in
  */
-export const publicRoutes = ["/"];
+export const publicRoutes = ["/","/error"];
 /**
  * these route will be redirected to when user is not registered 
  * @type {string[]}
