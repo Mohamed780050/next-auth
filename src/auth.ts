@@ -13,17 +13,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         },
         data: {
           emailVerified: new Date(),
-          
         },
       });
     },
   },
   callbacks: {
-    // async signIn({ user }) {
-    //   const existingUser = await UserInfo.getUserById(`${user.id}`);
-    //   if (!existingUser || !existingUser.emailVerified) return false;
-    //   return true;
-    // },
+    async signIn({ user, account }) {
+      if (account?.provider !== "credentials") return true;
+      const existingUser = await UserInfo.getUserById(`${user.id}`);
+      if (!existingUser || !existingUser.emailVerified) return false;
+      return true;
+    },
     async session({ session, token }) {
       if (token.sub && session.user) session.user.id = token.sub;
       if (token.role && session.user) {

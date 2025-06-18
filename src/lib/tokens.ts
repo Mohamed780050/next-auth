@@ -16,7 +16,9 @@ export async function generateToken(email: string) {
         expires,
       },
     });
+    return verificationToken.token;
   } catch (error) {
     console.log(error);
+    return null
   }
 }
