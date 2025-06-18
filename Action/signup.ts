@@ -4,6 +4,7 @@ import * as z from "zod";
 import { db } from "@/lib/db";
 import { registerSchema } from "@/Schema/validation";
 import user from "../data/user";
+import {generateToken} from "@/lib/tokens"
 export async function signup(values: z.infer<typeof registerSchema>) {
   try {
     const reValidation = registerSchema.safeParse(values);
@@ -21,8 +22,9 @@ export async function signup(values: z.infer<typeof registerSchema>) {
         password: hashedPassword,
       },
     });
+    await generateToken(email)
     // TODO: make sure to check the database if it contains the same email
-    return { success: "You sign in" };
+    return { success: "Confirmation code send to your email." };
   } catch (error) {
     console.log(typeof error);
     console.log(error);
