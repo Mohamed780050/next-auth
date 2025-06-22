@@ -15,7 +15,6 @@ export async function signup(values: z.infer<typeof registerSchema>) {
     const checkUser = await user.getUserByEmail(email);
     if (checkUser) return { err: "user different identifiers" };
     const hashedPassword = await bcrypt.hash(password, 10);
-    console.log("working");
     await db.user.create({
       data: {
         username: username,
@@ -24,7 +23,7 @@ export async function signup(values: z.infer<typeof registerSchema>) {
       },
     });
     const verficiationtoken = await generateToken(email);
-    if (!verficiationtoken) return { error: "we couldn't send the token" };
+    if (!verficiationtoken) return { err: "we couldn't send the token" };
     await sendVerificationEmail(email, verficiationtoken);
     // TODO: make sure to check the database if it contains the same email
     return { success: "Confirmation code send to your email." };

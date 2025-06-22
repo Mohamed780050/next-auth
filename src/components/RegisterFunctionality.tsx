@@ -20,6 +20,7 @@ import { signup } from "../../Action/signup";
 function RegisterFunctionality() {
   const [TIAE, setTIAE] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [loginMessage, setLoginMessage] = useState("");
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -31,10 +32,10 @@ function RegisterFunctionality() {
   async function onSubmit(values: z.infer<typeof registerSchema>) {
     try {
       const response = await signup(values);
-      console.log(response);
       if (response?.err) {
         setTIAE(true);
         setSuccess(false);
+        setLoginMessage(response.err);
       }
       if (response?.success) {
         setTIAE(false);

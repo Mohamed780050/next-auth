@@ -20,6 +20,7 @@ import { login } from "../../Action/login";
 function LoginFunctionality() {
   const [TIAE, setTIAE] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [loginMessage,setLoginMessage] = useState("")
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -28,18 +29,14 @@ function LoginFunctionality() {
     },
   });
   async function onSubmit(values: z.infer<typeof loginSchema>) {
-    try {
-      const response = await login(values);
-      console.log(response);
-      if (response?.err) {
-        setTIAE(true);
-        setSuccess(false);
-      } else {
-        setTIAE(false);
-        setSuccess(true);
-      }
-    } catch (err) {
-      console.log(err);
+    const response = await login(values);
+    if (response?.err) {
+      setTIAE(true);
+      setSuccess(false);
+      setLoginMessage(response.err)
+    } else {
+      setTIAE(false);
+      setSuccess(true);
     }
   }
   return (
@@ -66,8 +63,8 @@ function LoginFunctionality() {
             />
           ))}
         </div>
-        {TIAE && <FormError message="something is wrong" />}
-        {success && <FormSuccess message="worked" />}
+        {TIAE && <FormError message={loginMessage} />}
+        {success && <FormSuccess message="You signed in" />}
         <Button
           type="submit"
           className="w-full"

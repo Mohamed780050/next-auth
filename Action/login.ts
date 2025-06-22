@@ -15,22 +15,22 @@ export async function login(values: z.infer<typeof loginSchema>) {
     const exsistingUser = await db.user.findUnique({
       where: { email: identifier },
     });
-    if (!exsistingUser) return { error: "Invaild credentials" };
+    if (!exsistingUser) return { err: "Invaild credentials" };
     const foundToken = await db.verificationToken.findFirst({
       where: { email: identifier },
     });
     if (foundToken) {
       await db.verificationToken.delete({ where: { id: foundToken.id } });
       const verficiationtoken = await generateToken(identifier);
-      if (!verficiationtoken) return { error: "we couldn't send the token" };
+      if (!verficiationtoken) return { err: "we couldn't send the token" };
       await sendVerificationEmail(identifier, verficiationtoken);
     } else {
       const verficiationtoken = await generateToken(identifier);
-      if (!verficiationtoken) return { error: "we couldn't send the token" };
+      if (!verficiationtoken) return { err: "we couldn't send the token" };
       await sendVerificationEmail(identifier, verficiationtoken);
     }
     if (!exsistingUser.emailVerified)
-      return { error: "Conformation code is send." };
+      return { err: "Conformation code is send to your email." };
     await signIn("credentials", {
       identifier,
       password,
