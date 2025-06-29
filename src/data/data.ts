@@ -19,6 +19,15 @@ export const logInInputs: logInInputInterface[] = [
     label: "Password",
   },
 ];
+export const resetInputs = [
+  {
+    id: "Email",
+    name: "email",
+    placeholder: "Write your Username",
+    type: "text",
+    label: "Email",
+  },
+];
 export const registerInputs: RegisterInputsInterface[] = [
   {
     id: "email",

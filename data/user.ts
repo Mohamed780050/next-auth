@@ -6,6 +6,8 @@ async function getUserByEmail(identifier: string) {
         email: identifier,
       },
     });
+    console.log(identifier);
+    console.log(user);
     return user;
   } catch {
     return null;

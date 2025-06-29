@@ -1,6 +1,6 @@
 "use client";
 import * as z from "zod";
-import { loginSchema } from "@/Schema/validation";
+import { resetSchema } from "@/Schema/validation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -10,27 +10,25 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { logInInputs } from "@/data/data";
+import { resetInputs } from "@/data/data";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import FormError from "./FormError";
 import { useState } from "react";
 import FormSuccess from "./FormSuccess";
-import { login } from "../../Action/login";
-import Link from "next/link";
-function LoginFunctionality() {
+import { resetPassword } from "../../Action/reset";
+function ResetForm() {
   const [TIAE, setTIAE] = useState(false);
   const [success, setSuccess] = useState(false);
   const [loginMessage, setLoginMessage] = useState("");
-  const form = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<z.infer<typeof resetSchema>>({
+    resolver: zodResolver(resetSchema),
     defaultValues: {
-      identifier: "",
-      password: "",
+      email: "",
     },
   });
-  async function onSubmit(values: z.infer<typeof loginSchema>) {
-    const response = await login(values);
+  async function onSubmit(values: z.infer<typeof resetSchema>) {
+    const response = await resetPassword(values);
     if (response?.err) {
       setTIAE(true);
       setSuccess(false);
@@ -44,7 +42,7 @@ function LoginFunctionality() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <div className="space-y-4">
-          {logInInputs.map((input, index) => (
+          {resetInputs.map((input, index) => (
             <FormField
               key={index}
               control={form.control}
@@ -63,9 +61,6 @@ function LoginFunctionality() {
               )}
             />
           ))}
-          <Button variant="link" size="sm" className="px-0" asChild>
-            <Link href="/auth/reset">Forget password?</Link>
-          </Button>
         </div>
         {TIAE && <FormError message={loginMessage} />}
         {success && <FormSuccess message="You signed in" />}
@@ -74,10 +69,10 @@ function LoginFunctionality() {
           className="w-full"
           disabled={form.formState.isSubmitting}
         >
-          Login
+          Reset password
         </Button>
       </form>
     </Form>
   );
 }
-export default LoginFunctionality;
+export default ResetForm;

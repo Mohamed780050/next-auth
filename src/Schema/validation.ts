@@ -12,3 +12,6 @@ export const registerSchema = z.object({
   email: z.string().email().min(1, "don't leave that field empty"),
   password: z.string().min(1, "don't leave that field empty"),
 });
+export const resetSchema = z.object({
+  email: z.string().email().min(1, "don't leave that field empty"),
+});

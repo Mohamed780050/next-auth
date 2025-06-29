@@ -6,7 +6,12 @@ export const publicRoutes = ["/", "/auth/new-verification"];
  * these route will be redirected to when user is not registered
  * @type {string[]}
  */
-export const privateRoutes = ["/auth/login", "/auth/register", "/auth/error"];
+export const privateRoutes = [
+  "/auth/login",
+  "/auth/register",
+  "/auth/error",
+  "/auth/reset",
+];
 /**
  * this route should be allowed to every user either he is registered and signed in or not
  */
