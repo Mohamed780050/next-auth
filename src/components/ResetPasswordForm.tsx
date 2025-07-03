@@ -17,10 +17,15 @@ import FormError from "./FormError";
 import { useState } from "react";
 import FormSuccess from "./FormSuccess";
 import CardWrapper from "./CardWrapper";
+import { redirect, useSearchParams } from "next/navigation";
+import { resetPassword } from "../../Action/resetpassword";
 function ResetPasswordForm() {
   const [TIAE, setTIAE] = useState(false);
   const [success, setSuccess] = useState(false);
   const [loginMessage, setLoginMessage] = useState("");
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
+  if (token == null) redirect("/auth/login");
   const form = useForm<z.infer<typeof resetPasswordSchema>>({
     resolver: zodResolver(resetPasswordSchema),
     defaultValues: {
@@ -29,15 +34,15 @@ function ResetPasswordForm() {
     },
   });
   async function onSubmit(values: z.infer<typeof resetPasswordSchema>) {
-    // const response = await resetPassword(values);
-    // if (response?.err) {
-    //   setTIAE(true);
-    //   setSuccess(false);
-    //   setLoginMessage(response.err);
-    // } else {
-    //   setTIAE(false);
-    //   setSuccess(true);
-    // }
+    const response = await resetPassword(values, `${token}`);
+    if (response?.err) {
+      setTIAE(true);
+      setSuccess(false);
+      setLoginMessage(response.err);
+    } else {
+      setTIAE(false);
+      setSuccess(true);
+    }
     console.log(values);
   }
   return (
