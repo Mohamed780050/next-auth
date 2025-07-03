@@ -19,6 +19,13 @@ export interface logInInputInterface {
   type: "text" | "password";
   label: string;
 }
+export interface resetPasswordInputInterface {
+  id: string;
+  placeholder: string;
+  name: "confirmPassword" | "password";
+  type: "password";
+  label: string;
+}
 export interface RegisterInputsInterface {
   id: string;
   placeholder: string;

@@ -11,6 +11,7 @@ export const privateRoutes = [
   "/auth/register",
   "/auth/error",
   "/auth/reset",
+  "/auth/new-password",
 ];
 /**
  * this route should be allowed to every user either he is registered and signed in or not

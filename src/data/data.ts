@@ -1,6 +1,7 @@
 import {
   logInInputInterface,
   RegisterInputsInterface,
+  resetPasswordInputInterface,
 } from "@/Interfaces/interfaces";
 
 export const logInInputs: logInInputInterface[] = [
@@ -23,9 +24,25 @@ export const resetInputs = [
   {
     id: "Email",
     name: "email",
-    placeholder: "Write your Username",
+    placeholder: "Write your Email",
     type: "text",
     label: "Email",
+  },
+];
+export const passwordInputsReset:resetPasswordInputInterface[] = [
+  {
+    id: "password",
+    name: "password",
+    placeholder: "Write your password",
+    type: "password",
+    label: "password",
+  },
+  {
+    id: "confirm-password",
+    name: "confirmPassword",
+    placeholder: "rewrite your password",
+    type: "password",
+    label: "Confirm Password",
   },
 ];
 export const registerInputs: RegisterInputsInterface[] = [
