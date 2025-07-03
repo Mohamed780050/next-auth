@@ -46,7 +46,7 @@ function ResetForm() {
             <FormField
               key={index}
               control={form.control}
-              name={input.name}
+              name={`email`}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>{input.label}</FormLabel>

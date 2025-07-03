@@ -1,6 +1,23 @@
 import { randomUUID } from "crypto";
 import { db } from "./db";
 import { getVerificationToken } from "../../data/verficiation-token";
+import { getPasswordTokenByEmail } from "../../data/password-reset-token";
+
+export async function generatePasswordResetToken(email: string) {
+  const token = randomUUID().split("-")[0];
+  const expires = new Date(new Date().getTime() + 3600 * 1000);
+  const exsistingToken = await getPasswordTokenByEmail(email);
+  if (exsistingToken)
+    await db.passwordResetToken.delete({ where: { id: exsistingToken.id } });
+  const passwordResetToken = await db.passwordResetToken.create({
+    data: {
+      email,
+      token,
+      expires,
+    },
+  });
+  return passwordResetToken;
+}
 
 export async function generateToken(email: string) {
   try {
@@ -19,6 +36,6 @@ export async function generateToken(email: string) {
     return verificationToken.token;
   } catch (error) {
     console.log(error);
-    return null
+    return null;
   }
 }
