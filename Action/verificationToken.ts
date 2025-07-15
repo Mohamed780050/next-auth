@@ -17,6 +17,7 @@ export async function verifyEmialToken(token: string) {
       data: {
         emailVerified: new Date(),
         email: existingToken.email,
+        isEmailVerified: true,
       },
     });
     await db.verificationToken.delete({ where: { id: existingToken.id } });

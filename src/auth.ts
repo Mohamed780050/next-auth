@@ -27,7 +27,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (existingUser.isTwoFactorEnabled) {
         const twoFactorConfirmation =
           await getTwoFactorTokenConfirmationByUserId(existingUser.id);
-        if (!twoFactorConfirmation) return false;
+        // if (!twoFactorConfirmation) return false;
       }
       return true;
     },

@@ -22,16 +22,18 @@ export async function login(values: z.infer<typeof loginSchema>) {
     const foundToken = await db.verificationToken.findFirst({
       where: { email: identifier },
     });
-    
-    if (foundToken) {
-      await db.verificationToken.delete({ where: { id: foundToken.id } });
-      const verficiationtoken = await generateToken(identifier);
-      if (!verficiationtoken) return { err: "we couldn't send the token" };
-      await sendVerificationEmail(identifier, verficiationtoken);
-    } else {
-      const verficiationtoken = await generateToken(identifier);
-      if (!verficiationtoken) return { err: "we couldn't send the token" };
-      await sendVerificationEmail(identifier, verficiationtoken);
+    console.log(exsistingUser.isEmailVerified)
+    if (!exsistingUser.isEmailVerified) {
+      if (foundToken) {
+        await db.verificationToken.delete({ where: { id: foundToken.id } });
+        const verficiationtoken = await generateToken(identifier);
+        if (!verficiationtoken) return { err: "we couldn't send the token" };
+        await sendVerificationEmail(identifier, verficiationtoken);
+      } else {
+        const verficiationtoken = await generateToken(identifier);
+        if (!verficiationtoken) return { err: "we couldn't send the token" };
+        await sendVerificationEmail(identifier, verficiationtoken);
+      }
     }
     if (!exsistingUser.emailVerified)
       return { err: "Conformation code is send to your email." };
