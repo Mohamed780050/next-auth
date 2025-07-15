@@ -1,19 +1,16 @@
-import { auth, signOut } from "@/auth";
+"use client";
+
 import { Button } from "@/components/ui/button";
-async function page() {
-  const session = await auth();
-  console.log(session?.user);
+import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { signOut } from "next-auth/react";
+
+function page() {
+  const user = useCurrentUser();
+  console.log(user);
   return (
-    <div>
-      Setting: {JSON.stringify(session)}
-      <form
-        action={async () => {
-          "use server";
-          await signOut();
-        }}
-      >
-        <Button type="submit">Sign out</Button>
-      </form>
+    <div className="bg-white p-10 rouned-xl">
+      Setting: {JSON.stringify(user)}
+      <Button onClick={() => signOut()}>Sign out</Button>
     </div>
   );
 }
