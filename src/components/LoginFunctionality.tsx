@@ -102,7 +102,7 @@ function LoginFunctionality() {
           className="w-full"
           disabled={form.formState.isSubmitting}
         >
-          Login
+          {showTwoFactor ? "Confirm" : "Login"}
         </Button>
       </form>
     </Form>
