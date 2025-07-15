@@ -10,7 +10,7 @@ function Navbar() {
   const pathname = usePathname();
   return (
     <nav className="bg-secondary flex justify-between items-center p-4 rounded-xl w-full max-w-[600px] shadow-sm">
-      <ul>
+      <ul className="flex gap-2">
         {NavbarLinks.map((item, index) => (
           <li key={index}>
             <Button

@@ -1,6 +1,7 @@
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 import Navbar from "./_components/Navbar";
+import { Card } from "@/components/ui/card";
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -11,7 +12,9 @@ export default async function RootLayout({
     <>
       <SessionProvider session={session}>
         <Navbar />
-        {children}
+        <Card className="bg-white p-10 w-full max-w-[600px] mt-8 rounded-xl">
+          {children}
+        </Card>
       </SessionProvider>
     </>
   );

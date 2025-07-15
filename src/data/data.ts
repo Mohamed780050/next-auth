@@ -4,7 +4,7 @@ import {
   RegisterInputsInterface,
   resetPasswordInputInterface,
 } from "@/Interfaces/interfaces";
-import { Settings } from "lucide-react";
+import { Settings, Server, LaptopIcon, UserCog } from "lucide-react";
 import React from "react";
 
 export const logInInputs: logInInputInterface[] = [
@@ -76,5 +76,20 @@ export const NavbarLinks: NavbarLinksInterface[] = [
     href: "/settings",
     label: "Settings",
     icon: React.createElement(Settings, { size: 12 }),
+  },
+  {
+    href: "/server",
+    label: "Server",
+    icon: React.createElement(Server, { size: 12 }),
+  },
+  {
+    href: "/client",
+    label: "Client",
+    icon: React.createElement(LaptopIcon, { size: 12 }),
+  },
+  {
+    href: "/admin",
+    label: "Admin",
+    icon: React.createElement(UserCog, { size: 12 }),
   },
 ];
