@@ -1,8 +1,11 @@
 import {
   logInInputInterface,
+  NavbarLinksInterface,
   RegisterInputsInterface,
   resetPasswordInputInterface,
 } from "@/Interfaces/interfaces";
+import { Settings } from "lucide-react";
+import React from "react";
 
 export const logInInputs: logInInputInterface[] = [
   {
@@ -29,7 +32,7 @@ export const resetInputs = [
     label: "Email",
   },
 ];
-export const passwordInputsReset:resetPasswordInputInterface[] = [
+export const passwordInputsReset: resetPasswordInputInterface[] = [
   {
     id: "password",
     name: "password",
@@ -66,5 +69,12 @@ export const registerInputs: RegisterInputsInterface[] = [
     placeholder: "Write your Email",
     type: "password",
     label: "Password",
+  },
+];
+export const NavbarLinks: NavbarLinksInterface[] = [
+  {
+    href: "/settings",
+    label: "Settings",
+    icon: React.createElement(Settings, { size: 12 }),
   },
 ];

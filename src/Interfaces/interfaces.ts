@@ -33,3 +33,8 @@ export interface RegisterInputsInterface {
   type: "text" | "email" | "password";
   label: string;
 }
+export interface NavbarLinksInterface {
+  href: string;
+  label: string;
+  icon: ReactNode;
+}

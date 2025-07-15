@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 
 function LogInButton({
   children,
-  asChild,
+  // asChild,
   mode = "redirect",
 }: LoginButtonProps) {
   const router = useRouter();
