@@ -1,5 +1,8 @@
+import crypto from "crypto";
 import { randomUUID } from "crypto";
 import { db } from "./db";
+
+import { getTwoFactorTokenByEmail } from "../../data/two-factor-token";
 import { getVerificationToken } from "../../data/verficiation-token";
 import { getPasswordTokenByEmail } from "../../data/password-reset-token";
 
@@ -38,4 +41,21 @@ export async function generateToken(email: string) {
     console.log(error);
     return null;
   }
+}
+
+export async function generateTwoFactorToken(email: string) {
+  const token = randomUUID().split("-")[0];
+  const expires = new Date(new Date().getTime() + 3600 * 1000);
+  const exsistingToken = await getTwoFactorTokenByEmail(email);
+
+  if (exsistingToken)
+    await db.twoFactorToken.delete({ where: { id: exsistingToken.id } });
+  const twoFactorToken = await db.twoFactorToken.create({
+    data: {
+      email,
+      expires,
+      token,
+    },
+  });
+  return twoFactorToken;
 }

@@ -3,6 +3,8 @@ import authConfig from "./auth.config";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "./lib/db";
 import UserInfo from "@/../data/user";
+import { getTwoFactorTokenConfirmationByUserId } from "@/../data/two-factor-confirmation";
+
 type newSession = DefaultSession["user"] & { role: "ADMIN" | "USER" };
 export const { handlers, signIn, signOut, auth } = NextAuth({
   events: {
@@ -22,6 +24,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (account?.provider !== "credentials") return true;
       const existingUser = await UserInfo.getUserById(`${user.id}`);
       if (!existingUser || !existingUser.emailVerified) return false;
+      if (existingUser.isTwoFactorEnabled) {
+        const twoFactorConfirmation =
+          await getTwoFactorTokenConfirmationByUserId(existingUser.id);
+        if (!twoFactorConfirmation) return false;
+      }
       return true;
     },
     async session({ session, token }) {

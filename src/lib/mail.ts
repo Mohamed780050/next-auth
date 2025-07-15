@@ -19,3 +19,11 @@ export async function sendPasswordResetToken(email: string, token: string) {
     html: `<p>click <a href=${confirmLink}>here</a> to reset password.</p>`,
   });
 }
+export async function sendTwoFactorToken(email: string, token: string) {
+  await resend.emails.send({
+    from: "onboarding@resend.dev",
+    to: email,
+    subject: "2FA",
+    html: `<p>your code is ${token}</p>`,
+  });
+}

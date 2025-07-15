@@ -5,7 +5,7 @@ export const loginSchema = z.object({
     .min(1, "don't leave that field empty")
     .or(z.string().email()),
   password: z.string().min(1, "don't leave that field empty"),
-  // .min(8, "password is less than 8 chars"),
+  code:z.optional(z.string())
 });
 export const registerSchema = z.object({
   username: z.string().min(1, "don't leave that field empty"),

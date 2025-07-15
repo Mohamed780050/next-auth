@@ -20,6 +20,7 @@ export async function signup(values: z.infer<typeof registerSchema>) {
         username: username,
         email,
         password: hashedPassword,
+        
       },
     });
     const verficiationtoken = await generateToken(email);
