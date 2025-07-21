@@ -5,7 +5,7 @@ export const loginSchema = z.object({
     .min(1, "don't leave that field empty")
     .or(z.string().email()),
   password: z.string().min(1, "don't leave that field empty"),
-  code:z.optional(z.string())
+  code: z.optional(z.string()),
 });
 export const registerSchema = z.object({
   username: z.string().min(1, "don't leave that field empty"),
@@ -15,13 +15,26 @@ export const registerSchema = z.object({
 export const resetSchema = z.object({
   email: z.string().email().min(1, "don't leave that field empty"),
 });
-export const resetPasswordSchema = z.object({
-  password: z.string().min(1,"Don't let this field empty").min(8,"password is less than 8 chars"),
-  confirmPassword: z.string().min(1,"Don't let this field empty").min(8,"password is less than 8 chars"),
-}).superRefine((data,ctx) => {
-  if(data.password !== data.confirmPassword) ctx.addIssue({
-    code:"custom",
-    message:"password are not identical",
-    path:["confirmPassword"]
+export const resetPasswordSchema = z
+  .object({
+    password: z
+      .string()
+      .min(1, "Don't let this field empty")
+      .min(8, "password is less than 8 chars"),
+    confirmPassword: z
+      .string()
+      .min(1, "Don't let this field empty")
+      .min(8, "password is less than 8 chars"),
   })
+  .superRefine((data, ctx) => {
+    if (data.password !== data.confirmPassword)
+      ctx.addIssue({
+        code: "custom",
+        message: "password are not identical",
+        path: ["confirmPassword"],
+      });
+  });
+
+export const settingsSchema = z.object({
+  name: z.optional(z.string()),
 });

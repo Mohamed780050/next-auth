@@ -2,6 +2,7 @@ import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 import Navbar from "./_components/Navbar";
 import { Card } from "@/components/ui/card";
+import { Toaster } from "sonner";
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -16,6 +17,7 @@ export default async function RootLayout({
           {children}
         </Card>
       </SessionProvider>
+      <Toaster />
     </>
   );
 }

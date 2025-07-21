@@ -1,11 +1,14 @@
-"use client";
+import { currentUserInfo } from "@/lib/user";
+import ChangeRole from "../_components/ChangeRole";
 
-import { useCurrentUser } from "@/hooks/useCurrentUser";
-
-function page() {
+async function page() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const user = useCurrentUser();
+  const user = await currentUserInfo();
   console.log(user);
-  return <div></div>;
+  return (
+    <div>
+      <ChangeRole role={user?.role ? user.role : "USER"} />
+    </div>
+  );
 }
 export default page;
