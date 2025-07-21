@@ -1,7 +1,7 @@
 "use server";
 import { db } from "@/lib/db";
 import userInfo from "@/../data/user";
-import { getVerificationTokenByToken } from "../data/verficiation-token";
+import { getVerificationTokenByToken } from "../data/verification-token";
 export async function verifyEmialToken(token: string) {
   try {
     const existingToken = await getVerificationTokenByToken(token);

@@ -6,7 +6,7 @@ export async function getPasswordTokenByToken(token: string) {
       where: { token },
     });
     return passwordToken;
-  } catch (err) {
+  } catch {
     return null;
   }
 }
@@ -16,7 +16,7 @@ export async function getPasswordTokenByEmail(email: string) {
       where: { email },
     });
     return passwordToken;
-  } catch (err) {
+  } catch {
     return null;
   }
 }

@@ -5,7 +5,7 @@ export async function getTwoFactorTokenByToken(token: string) {
       where: { token },
     });
     return twoFactorToken;
-  } catch (error) {
+  } catch {
     return null;
   }
 }
@@ -15,7 +15,7 @@ export async function getTwoFactorTokenByEmail(email: string) {
       where: { email },
     });
     return twoFactorToken;
-  } catch (error) {
+  } catch {
     return null;
   }
 }

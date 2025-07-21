@@ -2,7 +2,7 @@ import { randomUUID } from "crypto";
 import { db } from "./db";
 
 import { getTwoFactorTokenByEmail } from "../../data/two-factor-token";
-import { getVerificationToken } from "../../data/verficiation-token";
+import { getVerificationToken } from "../../data/verification-token";
 import { getPasswordTokenByEmail } from "../../data/password-reset-token";
 
 export async function generatePasswordResetToken(email: string) {

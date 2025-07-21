@@ -5,7 +5,7 @@ export async function getTwoFactorTokenConfirmationByUserId(userId: string) {
       where: { userId },
     });
     return twoFactorConfirmation;
-  } catch (error) {
+  } catch {
     return null;
   }
 }
