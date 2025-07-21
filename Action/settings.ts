@@ -3,6 +3,7 @@
 import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { UserRole } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 
 export async function updateUserInfo(wantedRole: UserRole) {
   // try {
@@ -25,4 +26,5 @@ export async function updateUserInfo(wantedRole: UserRole) {
     where: { id: session.user.id },
     data: { role: wantedRole },
   });
+  revalidatePath("/");
 }

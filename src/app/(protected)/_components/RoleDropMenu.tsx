@@ -12,7 +12,7 @@ import { toast } from "sonner";
 import { useSession } from "next-auth/react";
 
 function RoleDropMenu({ role }: { role: UserRole }) {
-  const { update } = useSession();
+  const { update, data } = useSession();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -21,12 +21,12 @@ function RoleDropMenu({ role }: { role: UserRole }) {
       <DropdownMenuContent className="w-56" align="center">
         <DropdownMenuItem>
           <form
-            action={() => {
+            action={async () => {
               if (role === "USER") toast.error("your are already a user.");
               else {
-                updateUserInfo("USER");
+                await updateUserInfo("USER");
+                await update(data);
                 toast.success("Updated");
-                update();
               }
             }}
           >
@@ -35,12 +35,12 @@ function RoleDropMenu({ role }: { role: UserRole }) {
         </DropdownMenuItem>
         <DropdownMenuItem>
           <form
-            action={() => {
+            action={async () => {
               if (role === "ADMIN") toast.error("your are already a Admin.");
               else {
-                updateUserInfo("ADMIN");
+                await updateUserInfo("ADMIN");
+                await update();
                 toast.success("Updated");
-                update();
               }
             }}
           >
