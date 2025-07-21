@@ -9,6 +9,8 @@ async function page() {
       id={`${userInfo?.id}`}
       email={`${userInfo?.email}`}
       username={`${userInfo?.name}`}
+      isTwoFactorEnabled={userInfo?.isTwoFactorEnabled as boolean}
+      role={userInfo?.role ? userInfo.role : "USER"}
     />
   );
 }
