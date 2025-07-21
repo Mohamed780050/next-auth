@@ -20,6 +20,7 @@ import { signup } from "../../Action/signup";
 function RegisterFunctionality() {
   const [TIAE, setTIAE] = useState(false);
   const [success, setSuccess] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loginMessage, setLoginMessage] = useState("");
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
