@@ -15,7 +15,6 @@ function UserButton() {
       <DropdownMenuContent align="end" className="w-40">
         <DropdownMenuItem>
           <LogoutButton/>
-          Logout
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
