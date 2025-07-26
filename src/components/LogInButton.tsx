@@ -10,7 +10,7 @@ function LogInButton({
   const router = useRouter();
 
   function onClick() {
-    router.push("/auth/login");
+    router.push("auth/login");
   }
 
   if (mode === "modal")
