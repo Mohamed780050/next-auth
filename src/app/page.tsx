@@ -1,8 +1,8 @@
-import LogInButton from "@/components/LogInButton";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { LockKeyhole } from "lucide-react";
 import { Poppins } from "next/font/google";
+import Link from "next/link";
 
 const fonts = Poppins({
   subsets: ["latin"],
@@ -20,9 +20,9 @@ export default function Home() {
         <LockKeyhole size={50} />
         Auth
       </h1>
-      <LogInButton>
+      <Link href={"/auth/login"}>
         <Button>Sign in</Button>
-      </LogInButton>
+      </Link>
     </div>
   );
 }
